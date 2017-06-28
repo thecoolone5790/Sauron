@@ -1,7 +1,7 @@
 /**
  * Created by shawn on 2017. 6. 28..
  */
-
+// ex8_client.js
 var http = require('http');
 
 //HTTP Request의 옵션 설정
@@ -15,6 +15,7 @@ var options = {
 var callback = function (response) {
   //response 이벤트가 감지되면 데이터를 body에 받아온다
   var body = '';
+
   response.on('data', function (data) {
     body += data;
   });
