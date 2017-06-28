@@ -12,6 +12,10 @@
   > 3. Node.js는 이벤트 기반, 논 블로킹 I/O 모델을 사용해 가볍고 효율적입니다. 
   > 4. 패키지 생태계인 npm은 세계에서 가장 큰 오픈 소스 라이브러리이기도 합니다.
     
+  <p align = "center">
+         <img src = "https://velopert.com/wp-content/uploads/2016/02/ff.png"alt = ""/>
+  </p>  
+    
   ### 노드의 특징
   > 1. 비동기 I/O 처리 / 이벤트 위주  
     : Node.js 라이브러리의 모든 API는 비동기식입니다, 멈추지 않는다는거죠 (Non-blocking).  
