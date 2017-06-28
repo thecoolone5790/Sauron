@@ -15,7 +15,10 @@
         
     function Person(){} 
   ~~~
-  ![그림1](http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-11.png "이미지제목")
+  
+  <p align = "center">
+    <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-11.png"alt = ""/>
+  </ p>
   
   ~~~ javascript
     function Person(){}
