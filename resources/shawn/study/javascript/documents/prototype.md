@@ -7,8 +7,14 @@
   
   ### prototype - summary 
   1. 함수와 객체의 내부구조
+  
+  <p align = "center">
+     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-11.png"alt = ""/>
+  </p>
+    
   ~~~ javascript
-    // 1단계 : 함수 정의
+    // 1단계 : 함수 정의 
+        // 내부적으로 이함수는 프로토타입 객체가 생성됨
     // 2단계 : 파싱
         // 생성자 함수 - 해당 프로토타입 객체를 참조함
         // 해당 프로토타입 객체 - constructor속성을 통해 생성자 함수를 참조함
@@ -17,14 +23,28 @@
   ~~~
   
   <p align = "center">
-    <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-11.png"alt = ""/>
-  </ p>
+     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-02.png"alt = ""/>
+  </p>
   
   ~~~ javascript
-    function Person(){}
-      var merlin = new Person();
-      var del = new Person();
+   // 1단계 : 함수 정의
+       // 내부적으로 이함수는 프로토타입 객체가 생성됨
+   // 2단계 : 파싱
+        // 생성자 함수 - 해당 프로토타입 객체를 참조함
+        // 해당 프로토타입 객체 - constructor속성을 통해 생성자 함수를 참조함
+          
+    function Person(){} // Person 생성자 함수 - Person 프로토타입 객체를 참조(원형)
+    
+      // 이후 new 와 Person으로 통해 만들어지는 모든 객체는 Pserson 프로토타입 객체를 참조함
+      
+      var merlin = new Person(); //Person 프로토타입 객체 참조
+      var del = new Person(); //Person 프로토타입 객체 참조
   ~~~
+  
+  <p align = "center">
+     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-03.png"alt = ""/>
+  </p>
+
   
   ~~~ javascript
     function Person(){}
