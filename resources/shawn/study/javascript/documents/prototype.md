@@ -108,12 +108,15 @@
   ~~~
   
   3. 프로토타입이란?(프로토타입 링크)
-  
+   ... 작성중
+   
   4. 코드의 재사용(상속)
+   ... 작성중
   
   ### link - references
-  > * [medium.com/@bluesh55](https://medium.com/@bluesh55/javascript-prototype-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-f8e67c286b67 "포로토타입 이해하기")  
-  > * [developer.mozilla.org](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype "객체.프로토타입")  
-  > * [stackoverflow.com](https://stackoverflow.com/questions/4859308/in-javascript-why-typeof-function-prototype-is-function-not-object-like-ot "함수 객체")  
-  > * [stackoverflow.com](https://stackoverflow.com/questions/32928810/function-prototype-is-a-function "프로토타입 링크")
+  > * [MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype "MDN")  
+  > * [StackOverFlow](https://stackoverflow.com/questions/4859308/in-javascript-why-typeof-function-prototype-is-function-not-object-like-ot "함수 객체")  
+  > * [StackOverFlow](https://stackoverflow.com/questions/32928810/function-prototype-is-a-function "프로토타입 링크")
   > * [nextree.co.kr](http://www.nextree.co.kr/p7323/ "프로토타입 종합")
+  > * [medium.com/@bluesh55](https://medium.com/@bluesh55/javascript-prototype-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-f8e67c286b67 "포로토타입 이해하기")  
+
