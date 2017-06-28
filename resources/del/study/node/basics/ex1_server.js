@@ -1,8 +1,15 @@
-var http = require('http');
+var http = require("http");
+http.createServer(function(req, res){
+  /*
+   HTTP 헤더 전송
+   HTTP Status: 200 : OK
+   Content Type: text/plain
+   */
+  res.writeHead(200, {'Content-Type': 'text/plain'});
 
-//create a server object:
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.write('Hello World!'); //write a response to the client
-  res.end(); //end the response
-}).listen(8001); //the server object listens on port 8080
+  /*
+   Response Body 를 "Hello World" 로 설정
+   */
+  res.end("Hello World\n");
+
+}).listen(9999);
