@@ -57,3 +57,6 @@ CPU 사용률이 높은 어플리케이션에선 Node.js 사용을 권장하지 
 > [PDF](https://workshop.benzen.io/course/book.pdf)  
 >
 > [velopert](https://velopert.com/287)  
+>
+> [youtube](https://www.youtube.com/playlist?list=PLuHgQVnccGMBnrdKRODJmbH7UZ2A48LBK)
+>
