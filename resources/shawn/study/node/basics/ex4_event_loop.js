@@ -11,7 +11,7 @@
 // eventEmitter.on('evenName', eventHandler);
 // eventEmitter.emit('eventName');
 
-  //ex5_event_loop.js
+  //ex4_event_loop.js
   //event 모듈 사용
 var events = require('events');
 //---------------------------- import

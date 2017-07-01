@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>fibonacci</title>
+</head>
+<body>
+<script>
+  const givenSize = 10;
+
+  function fibonacci(size) {
+    var first = 0, second = 1, next, count = 2, result = [first, second];
+
+    if (size < 2) {
+      return "err"
+    }
+
+    while (count++ < size) {
+      next = first + second;
+      first = second;
+      second = next;
+      result.push(next);
+    }
+    return result;
+  }
+  console.log(fibonacci(givenSize));
+
+  function fibonacci2(size) {
+    var result = [0], count;
+
+    for (count = 1; count < size; count++) {
+      result[count] = (result[count - 1] || 1) + result[Math.max(0, count - 2)]
+    }
+    return result;
+  }
+  console.log(fibonacci2(givenSize));
+
+  function fibonacci3(size) {
+    var first = 0, second = 1, next, count = 0, result = [first, second];
+
+//    Array.prototype.getResult = [].push(); ??
+
+    while (2 + count++ < size) {
+      next = first + second;
+//      result.getResult(second = (first = second, next)); ??
+      first = second;
+      second = next;
+      result.push(next);
+    }
+    return result;
+  }
+  console.log(fibonacci3(givenSize));
+
+  function fibonacci4(size) {
+    var count, result = [0, 1];
+    if (size < 0) {
+      return 'err'
+    }
+
+    for (count = 2, result = [0, 1].slice(0, size); count < size; result.push(result[count - 1] + result[count - 2]), count++);
+
+    return result;
+  }
+  console.log(fibonacci4(givenSize));
+
+  function fibonacci5(size) {
+    var result = [0, 1, 1], nextIndex = 3, rate = 1.61803;
+
+    while (nextIndex < size) {
+      nextIndex = nextIndex + 1;
+
+      result.push(
+        Math.round(result[nextIndex - 2] * rate)
+      );
+    }
+
+    if (result.length > size) {
+      result = result.slice(0, size);
+    }
+
+    return result;
+  }
+  console.log(fibonacci5(givenSize));
+
+</script>
+</body>
+</html>

@@ -6,7 +6,7 @@
 //Blocking Code
 var fs = require("fs");
 
-var data = fs.readFileSync('ex3_input.txt');
+var data = fs.readFileSync('ref_input.txt');
 
 console.log(data.toString());
 console.log("Program has ended");

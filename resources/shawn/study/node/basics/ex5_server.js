@@ -10,7 +10,7 @@ http.createServer(function (req, res) {
   console.log('Request for ' + pathname + 'received');
   //파일 이름이 비어있다면 index.html 로 설정
   if(pathname == '/'){
-    pathname = 'ex6_index.html';
+    pathname = 'ref_index.html';
   }
 
   fs.readFile(pathname.substr(1), function (err, data) {
