@@ -14,7 +14,7 @@
 ## How it works
 
 <p align = "center">
-  <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Observer.svg/1600px-Observer.svg.png" alt = ""/>
+  <img src = "http://www.php5dp.com/wp-content/uploads/2015/04/observer.png" alt = ""/>
 </p> 
 
 ## Links
