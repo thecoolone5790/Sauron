@@ -1,14 +1,14 @@
 /**
  * Created by shawn on 2017. 6. 28..
  */
-// ex8_client.js
+// ex6_client.js
 var http = require('http');
 
 //HTTP Request의 옵션 설정
 var options = {
   host:'localhost',
   port:'7070',
-  path:'/ex6_index.html'
+  path:'/ref_index.html'
 };
 
 //콜백 함수로 Response를 받아준다
