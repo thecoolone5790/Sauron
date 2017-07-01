@@ -9,7 +9,7 @@
   1. 함수와 객체의 내부구조
   
   <p align = "center">
-     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-11.png"alt = ""/>
+     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-11.png" alt = ""/>
   </p>
     
   ~~~ javascript
@@ -23,7 +23,7 @@
   ~~~
   
   <p align = "center">
-     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-02.png"alt = ""/>
+     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-02.png" alt = ""/>
   </p>
   
   ~~~javascript
@@ -44,7 +44,7 @@
   2. 프로토타입 객체란?
 
   <p align = "center">
-     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-03.png"alt = ""/>
+     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-03.png" alt = ""/>
   </p>
 
   
@@ -73,7 +73,7 @@
   ~~~
   
   <p align = "center">
-     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-04.png"alt = ""/>
+     <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-04.png" alt = ""/>
   </p>  
   
   ~~~javascript
@@ -94,7 +94,7 @@
   ~~~
   
   <p align = "center">
-       <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-05.png"alt = ""/>
+       <img src = "http://www.nextree.co.kr/content/images/2016/09/hjkwon-140324-prototype-05.png" alt = ""/>
   </p>
   
   ~~~javascript

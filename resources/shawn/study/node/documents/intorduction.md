@@ -10,28 +10,26 @@
 
 ## Features
 
- 
+> 1. 비동기 I/O 처리 / 이벤트 위주  
+    : Node.js 라이브러리의 모든 API는 비동기식입니다, 멈추지 않는다는거죠 (Non-blocking).  
+    Node.js 기반 서버는 API가 실행되었을때, 데이터를 반환할때까지 기다리지 않고 다음 API 를 실행합니다.  
+    그리고 이전에 실행했던 API가 결과값을 반환할 시, NodeJS의 이벤트 알림 메커니즘을 통해 결과값을 받아옵니다.  
+> 2. 빠른 속도  
+  : 구글 크롬의 V8 자바스크립트 엔진을 사용하여 빠른 코드 실행을 제공합니다.
+> 3. 단일 쓰레드 / 뛰어난 확장성  
+  : Node.js는 이벤트 루프와 함께 단일 쓰레드 모델을 사용합니다. 이벤트 메커니즘은 서버가 멈추지않고 반응하도록 해주어 서버의 확장성을 키워줍니다.  
+    반면,  일반적인 웹서버는 (Apache) 요청을 처리하기 위하여 제한된 쓰레드를 생성합니다.   
+    Node.js 는 쓰레드를 한개만 사용하고  Apache 같은 웹서버보다 훨씬 많은 요청을 처리할 수 있습니다.    
+> 4. 노  버퍼링  
+  : Node.js 어플리케이션엔 데이터 버퍼링이 없고, 데이터를 chunk로 출력합니다.
+> 5. 라이센스  
+  : Node.js 는 MIT License가 적용되어있습니다.
 
 ## How it works
 
 <p align = "center">
-  <img src = "https://velopert.com/wp-content/uploads/2016/02/ff.png"alt = ""/>
+  <img src = "https://velopert.com/wp-content/uploads/2016/02/ff.png" alt = ""/>
 </p> 
-
-  > 1. 비동기 I/O 처리 / 이벤트 위주  
-    : Node.js 라이브러리의 모든 API는 비동기식입니다, 멈추지 않는다는거죠 (Non-blocking).  
-    Node.js 기반 서버는 API가 실행되었을때, 데이터를 반환할때까지 기다리지 않고 다음 API 를 실행합니다.  
-    그리고 이전에 실행했던 API가 결과값을 반환할 시, NodeJS의 이벤트 알림 메커니즘을 통해 결과값을 받아옵니다.  
-  > 2. 빠른 속도  
-  : 구글 크롬의 V8 자바스크립트 엔진을 사용하여 빠른 코드 실행을 제공합니다.
-  > 3. 단일 쓰레드 / 뛰어난 확장성  
-  : Node.js는 이벤트 루프와 함께 단일 쓰레드 모델을 사용합니다. 이벤트 메커니즘은 서버가 멈추지않고 반응하도록 해주어 서버의 확장성을 키워줍니다.  
-    반면,  일반적인 웹서버는 (Apache) 요청을 처리하기 위하여 제한된 쓰레드를 생성합니다.   
-    Node.js 는 쓰레드를 한개만 사용하고  Apache 같은 웹서버보다 훨씬 많은 요청을 처리할 수 있습니다.    
-  > 4. 노  버퍼링  
-  : Node.js 어플리케이션엔 데이터 버퍼링이 없고, 데이터를 chunk로 출력합니다.
-  > 5. 라이센스  
-  : Node.js 는 MIT License가 적용되어있습니다.
   
 ### tips
 
@@ -50,10 +48,15 @@ CPU 사용률이 높은 어플리케이션에선 Node.js 사용을 권장하지 
 ~~~
 ## Set up
 
+> [NodeJs](https://nodejs.org/ko/download/package-manager/)  
+>
+> [NPM](https://docs.npmjs.com/cli/install)  
+>
+> [HomeBrew](https://brew.sh/index_ko.html)  
+>
+
 ## Links
 
-> [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Node)  
->
 > [PDF](https://workshop.benzen.io/course/book.pdf)  
 >
 > [velopert](https://velopert.com/287)  
