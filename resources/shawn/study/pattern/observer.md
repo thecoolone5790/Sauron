@@ -14,7 +14,7 @@
 ## How it works
 
 <p align = "center">
-  <img src = "https://commons.wikimedia.org/wiki/File:Observer.svg?uselang=ko" alt = ""/>
+  <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Observer.svg/1600px-Observer.svg.png" alt = ""/>
 </p> 
 
 ## Links
