@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="target" style="width:100px;height:100px;background-color:red"></div>
+<script>
+  //elements
+  var targetBtn = document.getElementById('target');
+  //옵저버
+  var EventLooper = {
+    handlers: {},
+    add: function (event, handler, context) {
+      if (!this.handlers[event]) {
+        this.handlers[event] = [];
+      }
+
+      this.handlers[event].push({
+        handler: handler,
+        context: context
+      });
+    },
+    remove:function () {
+
+    },
+    stop:function () {
+
+    },
+    restorage:function () {
+
+    },
+    apply: function (event, data) {
+      if(!this.handlers[event]){
+        return;
+      }
+
+      this.handlers[event].forEach(function (element) {
+        element.handler.call(element.context, data);
+      });
+    }
+  };
+
+  //발행
+  var EventEmitter = {
+    emit:function () {
+      EventLooper.apply('change color','skyblue');
+    }
+  };
+
+  //구독
+  var Handler = {
+    color:'red',
+    changeColor:function (color) {
+      this.color = color;
+      targetBtn.style.backgroundColor  = color;
+    }
+  };
+
+  //execute
+  EventLooper.add('change color', Handler.changeColor, Handler);
+  EventEmitter.emit();
+
+//  targetBtn.addEventListener('click', );
+
+
+
+</script>
+</body>
+</html>

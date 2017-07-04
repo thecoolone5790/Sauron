@@ -58,7 +58,7 @@
       return 'err'
     }
 
-    for (count = 2, result = [0, 1].slice(0, size); count < size; result.push(result[count - 1] + result[count - 2]), count++);
+    for (count = 2, result.slice(0, size); count < size; result.push(result[count - 1] + result[count - 2]), count++){}
 
     return result;
   }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="target" style="width: 100px;height: 100px; background-color: red">
+
+</div>
+<script>
+
+  // 나무꾼, 필드
+  // 나무꾼 > 옵저버 > 필드 , 필드 > 옵저버 > 나무꾼
+  var observer = {
+    handler: [], // subscriber
+    register: function (event, fn, context) {
+      if (this.handler[event] === undefined) {
+        this.handler[event] = [];
+      }
+      this.handler[event].push({
+        fn: fn,
+        context: context
+      })
+    },
+    notify: function (event, data) {
+      if (this.handler[event] === undefined) return;
+      var current = this.handler[event];
+      for (var i = 0; i < current.length; i++) {
+        current[i].fn.call(current[i].context, data);
+      }
+    }
+  };
+
+  var Person = {
+    wood: 0,
+    setWood: function (wood) {
+      this.wood += wood;
+    }
+  };
+
+  var Field = {
+    publish: function () {
+      observer.notify('earnWood', 1);
+    }
+  };
+
+
+  observer.register('earnWood', Person.setWood, Person);
+  Field.publish();
+  Field.publish();
+
+  document.getElementById('target').addEventListener('click', function () {
+    Field.publish();
+    console.log(Person);
+  });
+  console.log(observer);
+
+
+
+</script>
+</body>
+</html>
