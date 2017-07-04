@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="target" style="width: 100px;height: 100px; background-color: red">
+
+</div>
+<script>
+
+  // 상자 기본색상 블랙 , 패인트공장 신상이 나왔습니다 레드 , 옵저버
+  var Observer = {
+    handlers: {},
+    bindHandlers: function (args) {
+      return function (el) {
+        el.handler.call(el.context, args);
+      }
+    },
+    add: function (evt, cb, elem) {
+      if (!this.handlers[evt]) {
+        this.handlers[evt] = [];
+      }
+      this.handlers[evt].push({
+        handler: cb,
+        context: elem
+      });
+    },
+    notify: function (evt, args) {
+      if (!this.handlers[evt]) {
+        return;
+      }
+      this.handlers[evt].forEach(this.bindHandlers(args));
+    }
+  };
+  var Factory = {
+    makeColor: function () {
+      Observer.notify('change', 'skyblue');
+    }
+  };
+  var Painter = {
+    color: 'black',
+    setColor: function (color) {
+      this.color = color;
+      document.getElementById('target').style.backgroundColor = color;
+    }
+  };
+
+  Observer.add('change', Painter.setColor, Painter);
+  Observer.add('change2', Painter.setColor, Painter);
+  Factory.makeColor();
+  console.log(Observer);
+  console.log(Painter);
+
+</script>
+</body>
+</html>
