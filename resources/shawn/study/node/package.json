@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/thecoolone5790/sauron#readme",
   "devDependencies": {
+    "ejs": "^2.5.6",
     "express": "^4.15.3",
     "nodemon": "^1.11.0"
   },

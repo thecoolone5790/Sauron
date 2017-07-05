@@ -5,10 +5,16 @@
   <title>Title</title>
 </head>
 <body>
-<div id="target" style="width:100px;height:100px;background-color:red"></div>
+<div id="target" style="width:100px;height:100px;background-color:darkgray"></div>
+<div id="target1" style="width:100px;height:100px;background-color:darkgray"></div>
+<div id="target2" style="width:100px;height:100px;background-color:darkgray"></div>
+
 <script>
   //elements
   var targetBtn = document.getElementById('target');
+  var targetBtn1 = document.getElementById('target1');
+  var targetBtn2 = document.getElementById('target2');
+
   //옵저버
   var EventLooper = {
     handlers: {},
@@ -22,45 +28,69 @@
         context: context
       });
     },
-    remove:function () {
+    remove:function (event) {
+      if (!this.handlers[event]) {
+        this.handlers[event] = [];
+      }
 
+      delete this.handlers[event];
     },
-    stop:function () {
+    stop:function (event) {
+      if (!this.handlers[event]) {
+        this.handlers[event] = [];
+      }
 
+//      this.handlers[event] = {
+//        handler: function (){},
+//        context: {}
+//      }
     },
     restorage:function () {
 
     },
-    apply: function (event, data) {
+    fire: function (event, target, data) {
       if(!this.handlers[event]){
         return;
       }
 
       this.handlers[event].forEach(function (element) {
-        element.handler.call(element.context, data);
+        element.handler.call(element.context, target, data);
       });
-    }
-  };
-
-  //발행
-  var EventEmitter = {
-    emit:function () {
-      EventLooper.apply('change color','skyblue');
     }
   };
 
   //구독
   var Handler = {
     color:'red',
-    changeColor:function (color) {
+    changeColor:function (target, color) {
       this.color = color;
-      targetBtn.style.backgroundColor  = color;
+      target.style.backgroundColor  = color;
+    }
+    // 생성자 함수를 통해서 재사용이 가능하게 만들어 진다면.. applyObserver 함수 프토타입을 이용해서 옵져버를 생성해주면 더 꿀일듯
+  };
+
+  //발행
+  var EventEmitter = {
+    emit:function () {
+      EventLooper.fire('change color', targetBtn, 'skyblue');
+      EventLooper.fire('change color 1', targetBtn1, 'pink');
+      EventLooper.fire('change color 2', targetBtn2, 'yellow');
     }
   };
 
   //execute
   EventLooper.add('change color', Handler.changeColor, Handler);
+  EventLooper.add('change color 1', Handler.changeColor, Handler);
+  EventLooper.add('change color 2', Handler.changeColor, Handler);
+  EventLooper.remove('change color 1');
+  EventLooper.remove('change color 2');
+  EventLooper.stop('change color');
+
+
   EventEmitter.emit();
+  console.log(EventLooper);
+
+
 
 //  targetBtn.addEventListener('click', );
 
