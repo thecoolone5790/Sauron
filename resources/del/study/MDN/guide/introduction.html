@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Title</title>
+    <script>
+//        var a = '가장 기본적인 변수 선언';
+//        let b = 'es6 문법, 블록 범위(scope) 지역 변수를 선언. 추가로 동시에 값을 초기화.';
+//        const c  = es6 문법, 상수를 선언 할때 사용;
+        var a ;
+        if(a===undefined){
+          console.log(true);
+        }else{
+          console.log(false);
+        }
+
+        a===undefined?console.log(true):console.log(false);
+
+        var arr  = [];
+        if(!arr[0]){
+          console.log('ddd');
+        }
+
+        // 수치문맥에서 null = 0 , ex)null+2 = 2  but undefinde + 2 = Nan;
+
+//        if(true){
+//          let x = 'let';
+//        }
+//        console.log(x);
+//        if(true){
+//          const y = 'const';
+//        }
+//        console.log(y);
+        //  둘다 not defined 뜸
+
+console.log(x === undefined); // logs "true"
+var x = 3;
+
+var myvar = "my value";
+// var myvar  -- 호이스팅
+(function() {
+  console.log(myvar); // undefined
+  var myvar = "local value";  // 호이스팅 되면 undefined 를 반환 // 변수선언 전에 변수를 사용
+})();
+
+
+console.log(this);
+
+
+var quote = "He read \"The Cremation of Sam McGee\" by R.W. Service.";
+console.log(quote);
+var num = 0; //false
+var bool = true;
+var str = ''; //false
+var und = undefined; //false;
+var nul =null; //false;
+var obj = {}; //fasle;
+
+
+
+        if(a){ //
+          console.log(a)
+        }
+
+
+function doSomethingErrorProne () {
+  if (ourCodeMakesAMistake()) {
+    throw (new Error('The a'));
+  } else {
+    doSomethingToGetAJavascriptError();
+  }
+}
+try {
+  doSomethingErrorProne();
+}
+catch (e) {
+  console.log(e.name); // logs 'Error'
+  console.log(e.message); // logs 'The message' or a JavaScript error message)
+}
+    </script>
+</head>
+<body>
+
+</body>
+</html>
