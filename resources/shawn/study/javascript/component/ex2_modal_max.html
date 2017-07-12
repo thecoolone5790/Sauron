@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>day1</title>
+
+<style>
+  #app {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+  }
+  /* type1 */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: .5;
+  }
+  .modal_dialog {
+    position: relative;
+    width: 600px;
+    margin: 30px auto;
+  }
+  .modal_content {
+    position: relative;
+    height: auto;
+    background-color: #fff;
+  }
+
+/* type2 */
+  /* .modal {
+
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .5;
+    background-color: #000;
+    z-index: 10;
+  }
+  .modal_dialog {
+    position: relative;
+    width: 600px;
+    margin: 30px auto;
+    z-index: 20;
+  }
+  .modal_content {
+    position: relative;
+    height: auto;
+    background-color: #fff;
+  } */
+
+</style>
+</head>
+<body>
+  <div id="app">
+    <button id="openModal">Modal</button>
+  </div>
+<script>
+
+//type1
+(function(win, doc) {
+
+  start();
+
+  function start() {
+    onCreateEvents(doc.querySelector('#app'));
+  }
+
+  function onCreateEvents(el) {
+    var openModalBtn = el.querySelector('#openModal');
+    openModalBtn.addEventListener('click', function() {
+      createModal(el);
+      onDestroyEvents(el);
+    }, false);
+  }
+
+  function createModal(el) {
+    var modal= doc.createElement('div');
+    modal.setAttribute('class', 'modal');
+
+    var modalDialog = doc.createElement('div');
+    modalDialog.setAttribute('class', 'modal_dialog');
+
+    var modalContent = doc.createElement('div');
+    modalContent.setAttribute('class', 'modal_content');
+
+    var closeBtn = doc.createElement('a');
+    closeBtn.setAttribute('class', 'modal_close_btn');
+    closeBtn.innerHTML = '닫기';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = 0;
+    closeBtn.style.right = 0;
+
+    modalContent.innerHTML = '<a target="_blank" href="www.naver.com">naber</a>';
+
+    modalDialog.appendChild(modalContent);
+    modalDialog.appendChild(closeBtn);
+    modal.appendChild(modalDialog);
+
+    el.appendChild(modal);
+  }
+
+  function onDestroyEvents(el) {
+    var modal = el.querySelector('.modal');
+    modal.addEventListener('click', function(e) {
+      if(e.target === this) {
+        destroyModal(this);
+      }
+    }, false);
+
+    var closeBtn = el.querySelector('.modal_close_btn');
+    closeBtn.addEventListener('click', function(e) {
+      destroyModal(modal);
+    }, false);
+  }
+
+  function destroyModal(modal) {
+    // modal.innerHTML = "";
+    modal.parentNode.removeChild(modal);
+  }
+
+})(window, document)
+
+
+
+//type2
+// (function(win, doc) {
+
+//   var el = doc.querySelector('#app');
+
+//   var openModalBtn = el.querySelector('#openModal');
+//   openModalBtn.addEventListener('click', function() {
+//     var modal = doc.createElement('div');
+//     modal.setAttribute('class', 'modal');
+
+//     var overlay = doc.createElement('div');
+//     overlay.setAttribute('class', 'overlay');
+
+//     var modalDialog = doc.createElement('div');
+//     modalDialog.setAttribute('class', 'modal_dialog');
+
+//     var modalContent = doc.createElement('div');
+//     modalContent.setAttribute('class', 'modal_content');
+
+//     modalContent.innerHTML = '모달입니다';
+
+//     modalDialog.appendChild(modalContent);
+//     modal.appendChild(overlay);
+//     modal.appendChild(modalDialog);
+
+//     el.appendChild(modal);
+//   }, false);
+
+// })(window, document)
+</script>
+</body>
+</html>
