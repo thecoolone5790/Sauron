@@ -1,0 +1,29 @@
+{
+  "name": "sauron",
+  "version": "1.0.0",
+  "description": "for studying node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ex1_server.js",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecoolone5790/sauron.git"
+  },
+  "author": "shawn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thecoolone5790/sauron/issues"
+  },
+  "homepage": "https://github.com/thecoolone5790/sauron#readme",
+  "devDependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
