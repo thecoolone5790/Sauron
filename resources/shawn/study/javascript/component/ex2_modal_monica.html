@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MODAL-MONAQ DAK KWON</title>
+</head>
+<style>
+  button {
+    width: 200px;
+    height: 70px;
+    font-size: 20px;
+    cursor: pointer
+  }
+  #layer {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 9
+  }
+  .modalDialog {
+    font-size: 50px;
+    text-align: center;
+    position: relative;
+    z-index: 999;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999)
+  }
+  .closeBtn {
+    font-size: 20px;
+    position: absolute;
+    margin: 10px;
+    right: 10px;
+    cursor: pointer
+  }
+  .closeBtn:hover {
+    opacity: 0.6;
+  }
+
+</style>
+<body>
+<div id="wrapper">
+  <div>
+    <button id="triggerBtn">Click</button>
+  </div>
+</div>
+</body>
+</html>
+<script>
+  (function(exports, doc){
+    'use strict'
+
+    var triggerId = 'triggerBtn'
+    var options = {
+      'trigger': document.getElementById(triggerId),
+      'width': 400,
+      'height': 300
+    }
+
+    function Modal(options) {
+      this.wrapper = document.getElementById('wrapper')
+      this.width = options.width || 300
+      this.height = options.height || 300
+      this.trigger = options.trigger
+
+      this.bindEvents()
+    }
+
+    Modal.prototype.bindEvents = function() {
+      var self = this
+
+      this.trigger.addEventListener('click', function() {
+        self.showModal()
+      })
+    }
+
+    Modal.prototype.modalEvents = function() {
+      var self = this
+      var closeBtn = document.querySelector('#closeBtn')
+      var layer = document.querySelector('#layer')
+
+      closeBtn.addEventListener('click', function () {
+        self.hideModal();
+      })
+
+      layer.addEventListener('click', function () {
+        self.hideModal();
+      })
+    }
+
+    Modal.prototype.showModal = function() {
+      var wrapper = this.wrapper
+      var width = this.width
+      var height = this.height
+      var area = document.createElement('div')
+      area.setAttribute('id','modalArea')
+      area.innerHTML = setTemplate(width, height)
+      wrapper.appendChild(area);
+
+      this.modalEvents()
+    }
+
+    Modal.prototype.hideModal = function() {
+      var area = document.querySelector('#modalArea')
+      var parent = this.wrapper
+//area.parentNode.removeChild()
+      parent.removeChild(area)
+    }
+
+    function setTemplate(width, height) {
+      var html = [];
+      html[html.length] = '<div id="layer"></div>'
+      html[html.length] = '<div id="popup" class="modalDialog" style="width:'+ width +'px; height:'+ height +'px">'
+      html[html.length] = '<span id="closeBtn" class="closeBtn">X</span>'
+      html[html.length] = '<img src="assets/4.gif" width="200px">'
+      html[html.length] = 'GRRRRRRR!!'
+      html[html.length] = '</div>'
+      return html.join('')
+    }
+
+    exports.Modal = Modal
+
+    function createModal() {
+      new Modal(options);
+    }
+
+    createModal();
+
+  })(window, document);
+
+</script>

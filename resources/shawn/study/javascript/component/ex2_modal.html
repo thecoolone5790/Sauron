@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <title>Modal</title>
   <style>
-    #context{overflow:hidden;width:600px;height:900px;margin:0 auto;padding:10px 10px;background-color:#efefef}
-    #btn1{width:100%;height:20px;margin:0 auto;font-weight:bold;color: #ef3d45}
-    #btn2{width:100%;height:20px;margin:0 auto;font-weight:bold;color: #00b537 }
-    #btn3{width:100%;height:20px;margin:0 auto;font-weight:bold;color: #3b5def }
+    #context { overflow: hidden; width: 600px; height: 900px; margin: 0 auto; padding: 10px 10px; background-color: #efefef }
+    #btn1 { width: 100%; height: 20px; margin: 0 auto; font-weight: bold; color: #ef3d45 }
+    #btn2 { width: 100%; height: 20px; margin: 0 auto; font-weight: bold; color: #00b537 }
+    #btn3 { width: 100%; height: 20px; margin: 0 auto; font-weight: bold; color: #3b5def }
   </style>
 </head>
 <body>
@@ -31,6 +31,12 @@
   </div>
 </div>
 <script>
+  //1. html 내장화 수정
+  //2. remove 부분 내장하기
+  //3. click 영역 확인 수정
+  //4. style -> css
+  //*** 동적으로 생성된 컴포넌트의 이벤트 해지
+
   function Modal(ctx, id) {
     this.ctx = ctx;
     this.id = id;
@@ -77,13 +83,13 @@
       if (_modal) {
         _modal.style.display = 'none';
       }
-    },
+    }, //삭제
     show: function () {
       var _modal = document.getElementById(this.id + 'Shade');
       if (_modal) {
         _modal.style.display = 'block';
       }
-    },
+    }, //삭제
     remove: function () {
       var _modal = document.getElementById(this.id + 'Shade');
       if (_modal) {

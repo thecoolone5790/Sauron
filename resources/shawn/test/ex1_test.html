@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="reset.css">
+  <style>
+    #oguWrap{width:1200px;margin:auto;padding:10px;background:#2c2c2c}
+    #oguWrap .wrap_search{background:#fff}
+    /* ico_search */
+    #oguWrap .ico_serch{}/*background url*/
+    /* search_nav */
+    #oguWrap .search_nav{position:relative;height:42px;background-color:#0086c5}
+    #oguWrap .search_nav .btn_search{display:block;position:absolute;width:22px;height:22px;top:10px;border-radius:4px;background-color:#006da0}
+    #oguWrap .search_nav .ico_serch:after{}/*size*/
+    #oguWrap .search_nav .ico_serch.on:after{}/*opacity*/
+    #oguWrap .btn_prev{left:18px}
+    #oguWrap .btn_next{right:78px}
+    #oguWrap .btn_close{right:18px}
+    #oguWrap .nav_tabs{overflow:hidden;float:left;padding:8px 48px 0}
+    #oguWrap .nav_tabs li{float:left;width:91px;height:34px;margin:0 1px;border-top-left-radius:5px;border-top-right-radius:5px;background-color:#004973}
+    #oguWrap .nav_tabs .on{background-color:#eaeaea}
+    #oguWrap .nav_tabs .on .tab_tit{color:#2c2c2c}
+    #oguWrap .nav_tabs .tab_tit{display:block;line-height:34px;font-size:13px;text-align:center;color:#fff}
+    /* search_form */
+    #oguWrap .search_form{overflow:hidden;height:48px;background-color:#eaeaea}
+    #oguWrap .search_form .box_period{float:left;position:relative;margin-top:11px;border:1px solid #d5d5d5;background-color:#fff}
+    #oguWrap .box_period:after{position:absolute;left:50%;top:10px;content:" ~ "}
+    #oguWrap .box_period .period_date{width:84px;height:26px;padding:10px;border:none;outline:none}
+  </style>
+</head>
+<body>
+<div id="oguWrap">
+  <div class="wrap_search">
+    <div class="search_nav">
+      <a href="javascript:;" class="ico_search btn_search btn_prev"> < </a> <!--활성화 .on 추가-->
+      <ul class="nav_tabs">
+        <li class="on"> <!--활성화시 li 에 .on 추가-->
+          <a href="javascript:;" class="tab_tit">통합검색</a></li>
+        <li><a href="javascript:;" class="tab_tit">장면메타</a></li>
+        <li><a href="javascript:;" class="tab_tit">큐레이션클럽</a></li>
+        <li><a href="javascript:;" class="tab_tit">프로그램회차</a></li>
+        <li><a href="javascript:;" class="tab_tit">시청률구간</a></li>
+        <li><a href="javascript:;" class="tab_tit">소셜클럽</a></li>
+        <li><a href="javascript:;" class="tab_tit">소셜메타</a></li>
+        <li><a href="javascript:;" class="tab_tit">대사</a></li>
+        <li><a href="javascript:;" class="tab_tit">움짤</a></li>
+        <li><a href="javascript:;" class="tab_tit">코너</a></li>
+        <li><a href="javascript:;" class="tab_tit">방송편성표</a></li>
+      </ul>
+      <a href="javascript:;" class="ico_search btn_search btn_next on"> > </a> <!--활성화 .on 추가-->
+      <a href="javascript:;" class="ico_search btn_search btn_close"> X </a>
+    </div>
+    <div class="search_form">
+      <div class="box_period">
+        <input class="period_date" type="text"><span class="ico_search ico_calender"></span>
+        <input class="period_date" type="text"><span class="ico_search ico_calender"></span>
+      </div>
+    </div>
+    <div class="search_cont">
+      <div class="cont_txt"></div>
+      <div class="cont_sort"></div>
+      <div class="cont_collections">
+        <div class="wrap_coll">
+          <div class="coll_tit"></div>
+          <div class="coll_cont"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
