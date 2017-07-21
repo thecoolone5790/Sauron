@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>모달!!</title>
+  <meta charset="utf-8">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #aaa;
+    opacity: .3;
+    z-index: 10;
+  }
+
+  .modal-dialog {
+    position: relative;
+    top: -500px;
+    margin: 0 auto;
+    background-color: pink;
+    z-index: 20;
+    transition: top .5s;
+    border: 1px solid #000;
+  }
+  .modal-on .modal-dialog {
+    top: 30px;
+  }
+  .modal-small .modal-dialog {
+    max-width: 200px;
+    height: 100px;
+  }
+  .modal-normal .modal-dialog {
+    max-width: 400px;
+    height: 300px;
+  }
+  .modal-large .modal-dialog {
+    max-width: 600px;
+    height: 400px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+  }
+</style>
+</head>
+<body>
+<button class="makeModal">modal1</button>
+
+
+<script>
+  (function(exports, doc) {
+
+    function Modal(options) {
+      var opt = options || {}
+      this.size = opt.size || 'normal'
+      this.childModalCallback = opt.childModalCallback && typeof opt.childModalCallback === 'function' ? opt.childModalCallback : null
+      this.el = template(this.size)
+      this.render()
+      this.bindEvents()
+    }
+
+    Modal.prototype.render = function() {
+      var self = this
+      var body = doc.querySelector('body')
+      body.appendChild(this.el)
+      this.createOverlay();
+
+      setTimeout(function() {
+        self.el.classList.add('modal-on')
+      }, 100)
+    }
+
+    Modal.prototype.bindEvents = function() {
+      var self = this
+      var overlay = doc.querySelector('.modal-overlay')
+
+      this.el.querySelector('.makeModal').addEventListener('click', function(e) {
+        if(self.childModalCallback) {
+          self.childModalCallback()
+        }
+      }, false)
+
+      this.el.querySelector('.modal-close').addEventListener('click', function(e) {
+        e.preventDefault()
+        self.destroy()
+      }, false)
+
+      overlay.addEventListener('click', function(e) {
+        e.preventDefault()
+        self.destroy()
+      }, false)
+
+      exports.addEventListener('resize', function(e) {
+        // self.el.querySelector('.modal-dialog').
+      }, false)
+    }
+
+    function template(size) {
+      var div = doc.createElement('div')
+      div.classList.add('modal')
+      div.classList.add('modal-' + size)
+      var html =  ` <div class="modal-dialog">
+                      <a href="#" class="modal-close">x</a>
+                      <div class="modal-header">모달1</div>
+                      <div class="modal-content">모달 컨텐츠</div>
+                      <button class="makeModal">모달</button>
+                    </div>`
+      div.innerHTML = html
+      return div
+    }
+
+    Modal.prototype.destroy = function() {
+      this.destroyOverlay();
+      this.el.parentNode.removeChild(this.el)
+    }
+
+    Modal.prototype.createOverlay = function() {
+      var parentNode = this.el.parentNode;
+      var modals = parentNode.querySelectorAll('.modal')
+      if(!parentNode.querySelector('.modal-overlay')) {
+        var overlay = doc.createElement('div')
+        overlay.classList.add('modal-overlay')
+        overlay.style.zIndex = 10
+        parentNode.appendChild(overlay)
+      } else {
+        var overlay = doc.querySelector('.modal-overlay')
+        overlay.style.zIndex = modals.length * 10
+        this.el.querySelector('.modal-dialog').style.zIndex = modals.length * 10 + 5
+      }
+    }
+
+    Modal.prototype.destroyOverlay = function() {
+      var parentNode = this.el.parentNode;
+      var overlay = parentNode.querySelector('.modal-overlay')
+      var modals = parentNode.querySelectorAll('.modal')
+      if(modals && modals.length === 1) {
+        overlay.parentNode.removeChild(overlay)
+      } else {
+        overlay.style.zIndex = (modals.length - 1) * 10
+      }
+    }
+
+    doc.querySelector('.makeModal').addEventListener('click', function() {
+      new Modal({
+        "size": "large",
+        "childModalCallback": function() {
+          new Modal({
+            "size": "normal",
+            "childModalCallback": function() {
+              new Modal({
+                "size": "small",
+                "childModalCallback": function() {
+                  new Modal({
+
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
+    }, false)
+
+
+  })(window, document)
+</script>
+</body>
+</html>

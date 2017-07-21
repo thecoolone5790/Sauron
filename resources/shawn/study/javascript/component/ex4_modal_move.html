@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ex4_Modal_move</title>
+  <style>
+    * { margin: 0; padding: 0 }
+
+    #wrapper { overflow: hidden; width: 600px; height: 300px; margin: 0 auto; padding: 10px 10px; background-color: #efefef }
+    #wrapper #btn {width: 100%;height: 100px;background-color:#fff}
+    #wrapper .modal-close { position: absolute; top: 5px; right: 5px; }
+    #wrapper .modal-tit { background-color: deeppink; color: white; height: 30px; line-height: 30px }
+    #wrapper .modal-coll { overflow: hidden; position: fixed; /*top:50%; left:50%; margin:-100px 0 0 -100px;*/width: 200px; height: 200px; background-color: #fff; text-align: center; border-radius: 10px; z-index: 2 }
+    #wrapper .modal-new { margin: 10px auto; width: 180px; height: 150px; border-radius: 40%; background-color: pink }
+    #wrapper .modal-shade { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); z-index: 1 }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <button id="btn">click me</button>
+</div>
+<script>
+  (function (exports, doc) {
+    'use strict';
+    exports.Modal = Modal;
+    function Modal(opts) {
+      if (!(this instanceof Modal)) {
+        return new Modal(opts);
+      }
+      this.opts = opts;
+      this.ctx = opts.ctx;
+      this.cb = opts.cb;
+      this.template = this.createTemplate();
+      this.bindEvents();
+    }
+
+    Modal.prototype.fire = function (el, evtName, opts) {
+      var evt = new CustomEvent(evtName, opts);
+      el.dispatchEvent(evt);
+    };
+    Modal.prototype.createTemplate = function () {
+      var template = doc.createElement('div');
+      var html = [];
+      html[html.length] = '<div class="modal-coll">';
+      html[html.length] = '<div class="modal-tit">모달</div>';
+      html[html.length] = '<div class="modal-cont"></div>';
+      html[html.length] = '<button class="modal-new">새로운 모달</button>';
+      html[html.length] = '<button class="modal-close">X</button>';
+      html[html.length] = '</div>';
+      html[html.length] = '<div class="modal-shade"></div>';
+      template.setAttribute('class', 'modal');
+      template.innerHTML = html.join('');
+      return template;
+    };
+    Modal.prototype.getContents = function (contents) {
+      this.contents = contents;
+    };
+    Modal.prototype.render = function () {
+      this.ctx.appendChild(this.template);
+    };
+    Modal.prototype.remove = function () {
+      var target = this.ctx.querySelector('.modal');
+      if (target) {
+        target.parentNode.removeChild(target);
+      }
+    };
+    Modal.prototype.bindEvents = function () {
+      var _this = this;
+      var template = this.template;
+      var body = doc.body;
+      var modalColl = template.querySelector('.modal-coll');
+      var modalShade = template.querySelector('.modal-shade');
+      var modalCollStyle = modalColl.style;
+
+      function mouseMoveHandler(e) {
+        modalCollStyle.top =  (e.clientY - 100)+'px';
+        modalCollStyle.left = (e.clientX - 100) +'px';
+      }
+
+      this.render();
+      template.querySelector('.modal-new').addEventListener('click', function () {
+        if(_this.cb){
+          _this.cb();
+        }
+      }, false);
+      template.querySelector('.modal-close').addEventListener('click', function () {
+        _this.remove();
+      }, false);
+      modalShade.addEventListener('click', function () {
+        _this.remove();
+      }, false);
+      modalShade.addEventListener('mouseout', function () {
+        body.removeEventListener('mousemove', mouseMoveHandler);
+      });
+      modalColl.addEventListener('mouseup', function () {
+        body.removeEventListener('mousemove', mouseMoveHandler);
+      });
+      modalColl.addEventListener('mousedown', function () {
+        body.addEventListener('mousemove', mouseMoveHandler);
+      });
+
+
+
+    };
+
+
+  })(window.comp = window.comp || {}, document);
+  var common = window.comp;
+  var wrapper = document.getElementById('wrapper');
+
+  document.getElementById('btn').addEventListener('click', function () {
+    new common.Modal({
+      ctx: wrapper, cb: function () {
+        new common.Modal({
+          ctx: wrapper, cb: function () {
+            new common.Modal({
+              ctx: wrapper, cb: function () {
+              }
+            });
+          }
+        });
+      }
+    });
+  });
+
+
+</script>
+</body>
+</html>
