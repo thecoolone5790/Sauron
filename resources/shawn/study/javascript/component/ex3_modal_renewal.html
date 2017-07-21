@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ex3_modal_renewal</title>
+  <style>
+    #context { overflow: hidden; width: 600px; height: 300px; margin: 0 auto; padding: 10px 10px; background-color: #efefef }
+    #context2 { overflow: hidden; width: 600px; height: 300px; margin: 0 auto; padding: 10px 10px; background-color: #efefef }
+    #btn { width: 100%; height: 20px; margin: 0 auto; font-weight: bold; color: deeppink }
+    #btn2 { width: 100%; height: 20px; margin: 0 auto; font-weight: bold; color: deepskyblue }
+    /*modal css start*/
+    #modal_close { position: absolute; top: 5px; right: 5px; }
+    #modal_tit { background-color: deeppink; color: white; height: 30px; line-height: 30px }
+    #modal_coll { overflow: hidden; position: fixed; width: 200px; height: 200px; background-color: #fff; text-align: center; border-radius: 10px; z-index: 101 }
+    #modal_shade { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); z-index: 100 }
+    /*modal css end*/
+    /*customMoal css start*/
+    #customModal_close { position: absolute; top: 5px; right: 5px; }
+    #customModal_tit { background-color: deepskyblue; color: white; height: 30px; line-height: 30px }
+    #customModal_coll { overflow: hidden; position: fixed; width: 200px; height: 200px; background-color: #fff; text-align: center; border-radius: 10px; z-index: 102 }
+    #customModal_shade { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); z-index: 100 }
+    /*customMoal css end*/
+  </style>
+</head>
+<body>
+<div id="context">
+  <button id="btn">기본형으로 만든 모달</button>
+</div>
+<div id="context2">
+  <button id="btn2">사용자 커스터마이징 모달</button>
+</div>
+<script>
+  // 클래스 바꾸기
+  !function (exports, doc) {
+    'use strict';
+    exports.Modal = Modal;
+    function _(target) {
+      return doc.querySelector(target);
+    }
+    function toStyleString(options) {
+      var results = [];
+      var RegExp = /[A-Z]/g;
+      for (var key in options) {
+        if (options.hasOwnProperty(key) && options[key]) {
+          console.log();
+          results[results.length] = key.replace(RegExp, function (x) {
+              return '-' + x.toLowerCase();
+            }) + ':' + options[key];
+        }
+      }
+      return results.join(';')
+    }
+    function Modal() {
+      if (!(this instanceof Modal)) {
+        return new Modal();
+      }
+      this.context = '#context';
+      this.trigger = '#btn';
+      this.id = '#modal'; //class or 임의로 생성?++
+      this.width = 200;
+      this.height = 200;
+      this.contents = '내용';
+      this.direction = 'top';
+      this.bindEvents();
+    } //생성자
+    Modal.prototype = {
+      getTemplate: function (id, width, height) {
+        var html = [];
+        var collStyle = {
+          width: width + 'px',
+          height: height + 'px',
+          marginTop: '-' + parseInt(Math.round(height / 2)) + 'px',
+          marginRight: 0,
+          marginBottom: 0,
+          marginLeft: '-' + parseInt(Math.round(width / 2)) + 'px',
+          top: 0,
+          left: 0
+        };
+        html[html.length] = '<div id="' + id + '">';
+        html[html.length] = '<div id="' + id + '_coll" style="' + toStyleString(collStyle) + '">';
+        html[html.length] = '<div id="' + id + '_tit">나의 첫번째 모달</div>';
+        html[html.length] = '<div id="' + id + '_cont">내용</div>';
+        html[html.length] = '<button id="' + id + '_close">X</button>';
+        html[html.length] = '</div>';
+        html[html.length] = '<div id="' + id + '_shade"></div>';
+        html[html.length] = '</div>';
+        return html.join('');
+      },
+      addOptions: function (options) {
+        this.removeEvents();
+        this.context = options.context || this.context;
+        this.trigger = options.trigger || this.trigger;
+        this.id = options.id || this.id;
+        this.width = options.width || this.width;
+        this.height = options.height || this.height;
+        this.contents = options.contents || this.contents;
+        this.direction = options.direction || this.direction;
+        this.bindEvents();
+      },
+      showType: function (type) {
+        var elem = _(this.id + '_coll').style;
+        var pos = 0;
+        var max = 50;
+        var movement = setInterval(frame, 8);
+        var typeMatcher = {'top': 'left', 'bottom': 'left', 'left': 'top', 'right': 'top'};
+        elem[typeMatcher[type]] = max + '%';
+        function frame() {
+          pos === max ? clearInterval(movement) : pos += 1;
+          elem[type] = pos + '%';
+        }
+      },
+      showOptions: function () {
+        for (var key in this) {
+          if (this.hasOwnProperty(key)) {
+            console.log(key + ' : ' + this[key]);
+          }
+        }
+      },
+      removeEvents:function () { // 이벤트 해지 헤보기
+        if(_(this.trigger)){
+          _(this.trigger).removeEventListener('click', this.draw.bind(this)); //같은게 아님 handler로 추가
+          console.log(_(this.trigger).removeEventListener('click', this.draw.bind(this)));
+        }
+        if(_(this.id)){
+          _(this.id + '_close').removeEventListener('click', this.remove.bind(this));
+          _(this.id + '_shade').removeEventListener('click', this.remove.bind(this));
+          console.log('pass');
+        }
+      },
+      bindEvents: function () {
+        var trigger = _(this.trigger);
+        if(trigger){
+          trigger.addEventListener('click', this.draw.bind(this));
+        }
+      },
+      addEvents: function () {
+        _(this.id + '_close').addEventListener('click', this.remove.bind(this));
+        _(this.id + '_shade').addEventListener('click', this.remove.bind(this));
+      },
+      remove: function () {
+        var target = _(this.id + '_wrap');
+        target.parentNode.removeChild(target);
+      },
+      draw: function () {
+        var wrapper = doc.createElement('div');
+        var modalId = this.id.substr(1);
+        var template = this.getTemplate(modalId, this.width, this.height);
+        wrapper.setAttribute('id', modalId + '_wrap');
+        wrapper.innerHTML = template;
+        _(this.context).appendChild(wrapper);
+        _(this.id + '_cont').innerHTML = this.contents;
+        this.addEvents();
+        this.showType(this.direction);
+      }
+    };
+  }(window.comp = window.comp || {}, document);
+
+  //사용자
+  !function (exports, doc) {
+    exports.kakaoDev = function () {
+      var modal = function () {
+        var ad = window.comp.Modal();
+        ad.showOptions();
+      };
+      var customModal = function () {
+        var opts = {
+          context:'#context2',
+          trigger:'#btn2',
+          id:'#customModal',
+          width:400,
+          height:400,
+          contents:'custom modal',
+          direction:'left'
+        };
+        var ad2 = window.comp.Modal();
+        ad2.addOptions(opts);
+        ad2.showOptions();
+      };
+
+      return {
+        init: function () {
+          modal();
+          customModal();
+        }
+      }
+    };
+  }(window.temp = window.temp || {}, document);
+  window.temp.kakaoDev().init();
+
+
+</script>
+</body>
+</html>
