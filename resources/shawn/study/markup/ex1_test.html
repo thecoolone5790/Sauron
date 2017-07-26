@@ -23,9 +23,16 @@
     #oguWrap .nav_tabs .tab_tit{display:block;line-height:34px;font-size:13px;text-align:center;color:#fff}
     /* search_form */
     #oguWrap .search_form{overflow:hidden;height:48px;background-color:#eaeaea}
-    #oguWrap .search_form .box_period{float:left;position:relative;margin-top:11px;border:1px solid #d5d5d5;background-color:#fff}
+    #oguWrap .search_form .box_common{float:left;margin-top:11px}
+    #oguWrap .box_period{position:relative;border:1px solid #d5d5d5;background-color:#fff}
     #oguWrap .box_period:after{position:absolute;left:50%;top:10px;content:" ~ "}
     #oguWrap .box_period .period_date{width:84px;height:26px;padding:10px;border:none;outline:none}
+    #oguWrap .box_channel{border:1px solid #d5d5d5;background-color:#fff}
+    #oguWrap .box_channel .channel_select{height:26px;padding:10px;border:none;outline:none;background-color:#fff}
+    #oguWrap .common_search{float:left;height:28px;margin-top:11px;outline:none;}
+    #oguWrap .btn_search{vertical-align:top;color:#fff;background-color:#2c2c2c;border:none}
+
+
   </style>
 </head>
 <body>
@@ -51,10 +58,21 @@
       <a href="javascript:;" class="ico_search btn_search btn_close"> X </a>
     </div>
     <div class="search_form">
-      <div class="box_period">
-        <input class="period_date" type="text"><span class="ico_search ico_calender"></span>
-        <input class="period_date" type="text"><span class="ico_search ico_calender"></span>
+      <div class="box_common box_period">
+        <input class="period_date" type="text" placeholder="2017.02.01"><span class="ico_search ico_calender"></span>
+        <input class="period_date" type="text" placeholder="2017.02.11"><span class="ico_search ico_calender"></span>
       </div>
+      <div class="box_common box_channel">
+        <select class="channel_select">
+          <option>채널전체</option>
+          <option>채널-1</option>
+          <option>채널-2</option>
+        </select>
+      </div>
+      <input class="common_search" type="text" placeholder="강남구">
+      <button class="common_search btn_search">검색</button>
+      <input class="common_search" type="text" placeholder="사업자명">
+      <input class="common_search" type="text" placeholder="프로그램명">
     </div>
     <div class="search_cont">
       <div class="cont_txt"></div>
@@ -68,5 +86,23 @@
     </div>
   </div>
 </div>
+<script>
+
+  (function (win, doc) {
+    function _(target) {
+      return doc.querySelectorAll(target);
+    }
+
+    var tabList = _('.tab_tit');
+
+    for(var i = 0; i < tabList.length; i++){
+      tabList[i].addEventListener('click', function () {
+        console.log(this.parentNode.childNodes[]);
+      });
+    }
+
+  })(window, document);
+
+</script>
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript" src="underline.js"></script>
+</head>
+<body>
+<div id="shawn"></div>
+<script type="text/javascript">
+  (function () {
+    console.log(_.select('#shawn'));
+
+
+    // Add an event listener.
+    _.on(document, 'customChangeEvent', function(e) {
+      document.body.innerHTML = e.detail;
+    });
+
+    // Trigger the event.
+    _.fire(document, 'customChangeEvent', {
+      detail: 'Display on trigger...'
+    });
+
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta name="viewport"
+        content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+  <style>
+    /*reset*/
+    * { margin: 0; padding: 0 }
+    ul, ol { list-style: none }
+    /*common*/
+    .scroll_x{ display: flex; overflow-x: auto; overflow-y: hidden; box-sizing: border-box; -webkit-overflow-scrolling: touch }
+    /*content*/
+    #game {  }
+    #game .wrap_battle { width: 100%; height: 300px; padding: 0 14px; box-sizing: border-box; background-color: #efefef}
+    #game .battle { height: 100%; background-color: #2c2c2c }
+    #game .list_dungeon {width: 100%; padding: 4px 0 }
+    #game .list_dungeon:after { display: block; clear: both; content: "" }
+    #game .list_dungeon li { float: left; margin-left:4px }
+    #game .list_dungeon li:first-child { margin-left: 14px }
+    #game .list_dungeon img { width: 100%; vertical-align: top }
+    #game .link_dungeon { display: block; overflow: hidden; width: 100px; border: 4px solid #fff; box-sizing: border-box; border-radius: 4px; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); }
+
+    #game .list_quest{ width: 100% }
+    #game .list_quest li { float: left; margin: 0 0 4px 4px }
+    #game .list_quest li:first-child { margin-left: 14px }
+    #game .link_quest {display: block;overflow: hidden; width: 205px; height:250px;border-box; background-color: #fff}
+
+  </style>
+</head>
+<body style="background-color: #efefef">
+<div id="game">
+  <div class="wrap_battle">
+    <div class="battle"></div>
+  </div>
+  <ul class="list_dungeon scroll_x">
+    <li>
+      <a href="javascript:;" class="link_dungeon">
+        <img src="resource/img/castle_orange.jpg">
+      </a>
+    </li>
+    <li>
+      <a class="link_dungeon">
+        <img src="resource/img/desert_red.jpg">
+      </a>
+    </li>
+    <li>
+      <a class="link_dungeon">
+        <img src="resource/img/forest_green.jpg">
+      </a>
+    </li>
+    <li>
+      <a class="link_dungeon">
+        <img src="resource/img/river_blue.jpg">
+      </a>
+    </li>
+    <li>
+      <a class="link_dungeon">
+        <img src="resource/img/sea_blue.jpg">
+      </a>
+    </li>
+  </ul>
+  <ul class="list_quest scroll_x">
+    <li>
+      <a href="javascript:;" class="link_quest">
+        <img src="">
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;" class="link_quest">
+        <img src="">
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;" class="link_quest">
+        <img src="">
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;" class="link_quest">
+        <img src="">
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;" class="link_quest">
+        <img src="">
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;" class="link_quest">
+        <img src="">
+      </a>
+    </li>
+  </ul>
+
+</div>
+</body>
+</html>
