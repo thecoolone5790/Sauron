@@ -10,18 +10,14 @@
 <script type="text/javascript">
   (function () {
     console.log(_.select('#shawn'));
-
-
     // Add an event listener.
     _.on(document, 'customChangeEvent', function(e) {
       document.body.innerHTML = e.detail;
     });
-
     // Trigger the event.
     _.fire(document, 'customChangeEvent', {
       detail: 'Display on trigger...'
     });
-
   })();
 </script>
 </body>

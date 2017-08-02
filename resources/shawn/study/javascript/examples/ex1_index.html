@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>prototype</title>
+  <script type="text/javascript" src="js/ex1_prototype.js"></script>
+</head>
+<body>
+<script>
+  //생성자
+  function T() {
+    this.name = 'tester shawn'
+  }
+  T.prototype = P.prototype; //프로토타입 병합
+  T.prototype.test = function (msg) {
+    this.test= msg;
+    return this;
+  };
+
+  var shawn = P('shawn'); //생성
+  var tester = new T(); //생성
+
+  console.log(shawn.test('hurry up'));
+  console.log(tester.getName());
+
+
+
+</script>
+</body>
+</html>

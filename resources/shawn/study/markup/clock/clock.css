@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+ul {
+  list-style: none; }
+
+.wrap {
+  width: 360px;
+  height: 500px;
+  position: relative;
+  border: 2px solid #222;
+  overflow: hidden; }
+  .wrap #chk:checked + .btn {
+    right: 10px; }
+  .wrap #chk:checked + .btn {
+    right: 10px; }
+  .wrap .btn {
+    position: absolute;
+    right: -20px;
+    bottom: 292px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    background: #f00;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: cubic-bezier(0, 1.67, 0.34, 0.15) 0.5s; }
+    .wrap .btn ul {
+      margin-top: 10px; }
+      .wrap .btn ul li {
+        width: 25px;
+        height: 3px;
+        margin-bottom: 5px;
+        background: #fff;
+        display: block;
+        margin-left: 7px;
+        position: relative; }
+  .wrap .circle {
+    width: 320px;
+    height: 320px;
+    right: -160px;
+    position: absolute;
+    bottom: 160px;
+    border-radius: 100%;
+    overflow: hidden;
+    transform-origin: center center; }
+    .wrap .circle li {
+      position: absolute;
+      top: 0;
+      height: 150px;
+      left: 0;
+      width: 12.5%;
+      left: 50%;
+      transform-origin: center bottom;
+      transform: rotate(0deg);
+      transition: .5s all ease-in-out;
+      opacity: 0; }
+      .wrap .circle li:after {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 43px;
+        height: 43px;
+        border-radius: 50%;
+        background: #ff0;
+        content: ""; }
+  .wrap #chk:checked ~ .circle li {
+    opacity: 1; }
+    .wrap #chk:checked ~ .circle li:nth-child(2) {
+      transform: rotate(-20deg);
+      transition-delay: .01; }
+    .wrap #chk:checked ~ .circle li:nth-child(3) {
+      transform: rotate(-40deg);
+      transition-delay: .02; }
+    .wrap #chk:checked ~ .circle li:nth-child(4) {
+      transform: rotate(-60deg);
+      transition-delay: .03; }
+    .wrap #chk:checked ~ .circle li:nth-child(5) {
+      transform: rotate(-80deg);
+      transition-delay: .04; }
+    .wrap #chk:checked ~ .circle li:nth-child(6) {
+      transform: rotate(-100deg);
+      transition-delay: .05; }
+    .wrap #chk:checked ~ .circle li:nth-child(7) {
+      transform: rotate(-120deg);
+      transition-delay: .06; }
+    .wrap #chk:checked ~ .circle li:nth-child(8) {
+      transform: rotate(-140deg);
+      transition-delay: .07; }
+    .wrap #chk:checked ~ .circle li:nth-child(9) {
+      transform: rotate(-160deg);
+      transition-delay: .08; }
+    .wrap #chk:checked ~ .circle li:nth-child(10) {
+      transform: rotate(-180deg);
+      transition-delay: .09; }
+
+/*# sourceMappingURL=clock.css.map */

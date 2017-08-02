@@ -1,0 +1,4 @@
+#list { overflow: hidden }
+
+#list li {
+  float: left; margin: 5px; width: 100px; height: 50px; background-color: deeppink; font-size: 30px; line-height: 50px; text-align: center; color: white }

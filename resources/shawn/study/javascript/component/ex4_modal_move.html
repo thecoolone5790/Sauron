@@ -31,13 +31,14 @@
       this.ctx = opts.ctx;
       this.cb = opts.cb;
       this.template = this.createTemplate();
+      this.render();
       this.bindEvents();
     }
 
-    Modal.prototype.fire = function (el, evtName, opts) {
-      var evt = new CustomEvent(evtName, opts);
-      el.dispatchEvent(evt);
-    };
+//    Modal.prototype.fire = function (el, evtName, opts) {
+//      var evt = new CustomEvent(evtName, opts);
+//      el.dispatchEvent(evt);
+//    };
     Modal.prototype.createTemplate = function () {
       var template = doc.createElement('div');
       var html = [];
@@ -52,9 +53,9 @@
       template.innerHTML = html.join('');
       return template;
     };
-    Modal.prototype.getContents = function (contents) {
-      this.contents = contents;
-    };
+    //    Modal.prototype.getContents = function (contents) {
+    //      this.contents = contents;
+    //    };
     Modal.prototype.render = function () {
       this.ctx.appendChild(this.template);
     };
@@ -65,64 +66,70 @@
       }
     };
     Modal.prototype.bindEvents = function () {
-      var _this = this;
+      var self = this;
       var template = this.template;
       var body = doc.body;
-      var modalColl = template.querySelector('.modal-coll');
-      var modalShade = template.querySelector('.modal-shade');
+      var modalColl = template.querySelector('.modal-coll'); // ctx검색
+      var modalShade = template.querySelector('.modal-shade'); //ctx검색
       var modalCollStyle = modalColl.style;
 
       function mouseMoveHandler(e) {
-        modalCollStyle.top =  (e.clientY - 100)+'px';
-        modalCollStyle.left = (e.clientX - 100) +'px';
+        modalCollStyle.top =  (e.clientY-100)+'px';
+        modalCollStyle.left = (e.clientX-100) +'px';
+//        modalCollStyle.top =  (e.offsetTop)+'px';
+//        modalCollStyle.left = (e.offsetLeft) +'px';
       }
 
-      this.render();
       template.querySelector('.modal-new').addEventListener('click', function () {
-        if(_this.cb){
-          _this.cb();
+        if(self.cb){
+          self.cb();
         }
       }, false);
       template.querySelector('.modal-close').addEventListener('click', function () {
-        _this.remove();
+        self.remove();
       }, false);
       modalShade.addEventListener('click', function () {
-        _this.remove();
+        self.remove();
       }, false);
       modalShade.addEventListener('mouseout', function () {
         body.removeEventListener('mousemove', mouseMoveHandler);
-      });
+      }, false);
       modalColl.addEventListener('mouseup', function () {
         body.removeEventListener('mousemove', mouseMoveHandler);
-      });
+      }, false);
       modalColl.addEventListener('mousedown', function () {
         body.addEventListener('mousemove', mouseMoveHandler);
-      });
-
-
+      }, false);
 
     };
 
 
   })(window.comp = window.comp || {}, document);
+
   var common = window.comp;
   var wrapper = document.getElementById('wrapper');
-
   document.getElementById('btn').addEventListener('click', function () {
     new common.Modal({
       ctx: wrapper, cb: function () {
         new common.Modal({
           ctx: wrapper, cb: function () {
-            new common.Modal({
-              ctx: wrapper, cb: function () {
-              }
-            });
+
           }
         });
       }
     });
   });
 
+  //ctx검색
+  //shade z index 범위 설정
+  //clientX Y  좌표 ㅠㅠ 기준좌표
+  //http://ohgyun.com/571 ***
+  //offsetX, Y : 부모기준 좌표 (상대적)
+  //clientX, Y : 전체기준 좌쵸 (절대적)
+  //offsetTop, Lest : 부모가 position(re,ab,fix) - 높이값 (상대적)
+  //clientTop, Lest : 박스모델 border 값
+  //offsetWidth, Height
+  //clientWidth, Height
 
 </script>
 </body>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #test{width: 300px;height: 80px;overflow: hidden}
+  </style>
+  <script src="node_modules/snapsvg/dist/snap.svg-min.js"></script>
+</head>
+<body>
+
+
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+  <g>
+    <title>Layer 1</title>
+    <path stroke="#000000" id="svg_16" d="m7.81545,78l-0.59986,-49.84186l-4.79892,-6.19795l0,-19.62685l284.53577,0l5.99865,7.74744l0,31.7645l4.79892,6.19795l0,29.95677l-289.93455,0z" fill-opacity="0.8" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="4" fill="#e5e5e5">
+      <image stroke="null" xlink:href="" id="svg_29" height="80" width="300" y="-5" x="0.49999"/>
+    </path>
+  </g>
+</svg>
+
+<script>
+  (function () {
+    var s = Snap(300,80);
+//    var borderFrame = s.path('m5.50021,5l-0.25021,15.44305l5.0041,7.2242l0.5,46.58363l284.49589,0.74912l-0.50064,-26.4057l-5.25432,-6.72598l-0.25021,-31.137l-4.25366,-5.73132l-279.49094,0z');
+    var imgFrame = s.path('m7.81545,78l-0.59986,-49.84186l-4.79892,-6.19795l0,-19.62685l284.53577,0l5.99865,7.74744l0,31.7645l4.79892,6.19795l0,29.95677l-289.93455,0z');
+    var imgEl = s.image('https://dummyimage.com/300x80/efefef/000000',0,0,300,80);
+//    var smallCircle = s.circle(100,150,70);
+//    var total = s.group(imgFrame, smallCircle);
+    imgFrame.attr({
+      stroke:'#000'
+    });
+
+
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MODAL-MONAQ DAK KWON</title>
+</head>
+<style>
+    button {
+        width: 200px;
+        height: 70px;
+        font-size: 20px;
+        cursor: pointer
+    }
+    .layer {
+        position: fixed;
+        font-family: Arial, Helvetica, sans-serif;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 999
+    }
+    .modalDialog {
+        font-size: 50px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 5px 20px 13px 20px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        background: #fff;
+        background: -moz-linear-gradient(#fff, #999);
+        background: -webkit-linear-gradient(#fff, #999);
+        background: -o-linear-gradient(#fff, #999);
+    }
+    .closeBtn {
+        font-size: 20px;
+        position: absolute;
+        margin: 10px;
+        right: 10px;
+        cursor: pointer
+    }
+    .closeBtn:hover {
+        opacity: 0.6;
+    }
+
+    .active {
+        animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    @keyframes scaleBack {
+        0% {
+            top: -30%;
+        }
+        100% {
+            top: 0;
+        }
+    }
+
+</style>
+<body>
+<div id="wrapper">
+    <div>
+        <button id="triggerBtn">Click</button>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var setOptions = []
+    setOptions[0] = {
+        'width': 600,
+        'height': 500,
+        'img': 'assets/2.gif',
+        'text': 'Modal1111',
+        'appendChild': true
+    }
+    setOptions[1] = {
+        'width': 500,
+        'height': 400,
+        'img': 'assets/4.gif',
+        'text': 'modal2222',
+        'appendChild': true
+    }
+    setOptions[2] = {
+        'width': 200,
+        'height': 100,
+        'img': '',
+        'text': 'modal333',
+        'appendChild': false
+    }
+</script>
+<script>
+    (function (exports, doc) {
+        'use strict';
+
+        var modalStack = [];
+        var trigger = doc.getElementById('triggerBtn');
+        var selected = null,
+            x_pos = 0, y_pos = 0,
+            x_elem = 0, y_elem = 0;
+
+        function Modal(options) {
+            this.width = options.width || 300;
+            this.height = options.height || 300;
+            this.text = options.text || '';
+            this.img = options.img || '';
+            this.appendChild = options.appendChild || false;
+            this.el = setTemplate(this.width, this.height, this.text, this.img, this.appendChild);
+            if (this.appendChild && setOptions[modalStack.length]) {
+                this.childTrigger = this.el.querySelector('.trigger');
+            }
+            this.closeBtn = this.el.querySelector('.closeBtn');
+            this.layer = this.el.querySelector('.layer');
+            this.bindEvents();
+        }
+
+        Modal.prototype.bindEvents = function () {
+            var self = this;
+            doc.body.appendChild(this.el);
+            var modalDialog = this.el.querySelector('.modalDialog')
+            var layer = this.el.querySelector('.layer')
+            layer.style.zIndex = 98 + modalStack.length
+            modalDialog.style.zIndex = 99 + modalStack.length
+            modalStack.push(this.el);
+
+            //up시에 이벤트 해지
+            this.el.addEventListener('mousedown', function () {
+                _drag_init(modalDialog);
+                return false;
+            });
+
+            if (this.appendChild && setOptions[modalStack.length]) {
+                this.childTrigger.addEventListener('click', function () {
+                    createModal(setOptions);
+                });
+            }
+            this.closeBtn.addEventListener('click', function () {
+                self.hideModal();
+            });
+            this.layer.addEventListener('click', function () {
+                self.hideModal();
+            });
+
+            doc.onmousemove = _move_elem;
+            doc.onmouseup = _destroy;
+        };
+
+        Modal.prototype.hideModal = function () {
+            var area = this.el;
+            area.parentNode.removeChild(area);
+            modalStack.pop();
+        };
+        //offset: margin이 포함
+        function _drag_init(elem) {
+            selected = elem;
+            x_elem = x_pos - selected.offsetLeft;//부모기준 좌표(상대적)
+            y_elem = y_pos - selected.offsetTop;//전체 doc기준 좌표 (절대적)
+            //offSet: 부모가 포지션을 가지고 있을 떄의 높이값 (상대적)
+            //clientTop: 박스모델의 border값
+        }
+
+        function _move_elem(e) {
+            x_pos = e.pageX;
+            y_pos = e.pageY;
+            if (selected !== null) {
+                selected.style.left = (x_pos - x_elem) + 'px';
+                selected.style.top = (y_pos - y_elem) + 'px';
+            }
+        }
+        function _destroy() {
+            selected = null;
+        }
+
+        function setTemplate(width, height, text, img, appendChild) {
+            var area = doc.createElement('div');
+            var html = [];
+
+            html[html.length] = '<div class="layer"></div>';
+            html[html.length] = '<div id="popup" class="modalDialog" style="width:' + width + 'px; height:' + height + 'px">';
+            html[html.length] = '<span id="closeBtn" class="closeBtn">X</span>';
+            html[html.length] = '<img src="'+ img +'" width="200px">';
+            html[html.length] = text;
+            if (appendChild && setOptions[modalStack.length]) {
+                html[html.length] = '<button class="trigger">Add</button>';
+            }
+            html[html.length] = '</div>';
+            area.setAttribute('id', 'modal' + (modalStack.length + 1));
+            area.style.zIndex = 999 + modalStack.length
+            area.innerHTML = html.join('');
+
+            return area;
+        }
+
+        exports.Modal = Modal;
+
+        function createModal(setOptions) {
+            var index = modalStack.length;
+            new Modal(setOptions[index]);
+        }
+
+        trigger.addEventListener('click', function () {
+            createModal(setOptions);
+        });
+    })(window, document)
+</script>

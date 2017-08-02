@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var data = {
+    name:'rain'
+  };
+  (function (exports) {
+    exports.Person = Person;
+    function Person(opts) {
+      this.name = opts.name;
+    }
+  })(window);
+
+  var rain = new window.Person(data);
+  console.log(rain);
+</script>
+</body>
+</html>

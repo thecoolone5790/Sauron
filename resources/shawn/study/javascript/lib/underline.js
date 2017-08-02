@@ -3,7 +3,7 @@
  */
 (function (exports, doc) {
   'use strict';
-  function executeUnderline() {
+  function test() {
     var _ = {};
     _.select = function (t) {
       return doc.querySelectorAll(t);
@@ -30,6 +30,6 @@
     return _;
   }
   if (typeof _ === 'undefined') {
-    exports._ = executeUnderline();
+    exports._ = test();
   }
 })(window, document);
