@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+  <title>Title</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0; }
+    ul {
+      list-style: none; }
+    #wrapper{
+      overflow: hidden;
+      position: relative;
+      width: 360px;
+      height: 400px;
+      margin: 0 auto;
+      border: 1px solid #000;
+      background-color: #262f3b;
+    }
+    #wrapper .list_item{
+      position: relative;
+      height: 2000px;
+    }
+    #wrapper .list_item li{
+      overflow: hidden;
+      width: 100%;
+      height: 80px;
+      vertical-align: top;
+      transition: all .5s;
+      transform: translateY(0);
+      /*transform: scale(.6);*/
+      opacity: .6;
+    }
+    #wrapper .list_item li.on{
+      transform: scale(1);
+      opacity: 1;
+
+    }
+    #wrapper .list_item li:hover{
+
+      /*width: 100%;*/
+    }
+    /*#wrapper .list_item .img_item{*/
+      /*transform: translateX(-50%);*/
+    /*}*/
+    #wrapper .list_item .img_item{
+      position: absolute;
+      right: 0;
+    }
+    #wrapper .list_item .img_item:hover{
+    }
+   .progress_gage{
+      position: relative;
+      width: 360px;
+      height: 50px;
+    }
+    .progress_gage .bar_smash{
+      position: absolute;
+      top:0;
+      left:85%;
+
+    }
+    .progress_gage .bar_smash .target_smash{
+      width: 10px;
+      height: 25px;
+      background-color:rgba(111,222,78,.5);
+    }
+    .progress_gage .bar_gage{
+      width: 0;
+      height: 25px;
+      background-color: red;
+    }
+  </style>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="wrapper">
+  <ul class="list_item">
+    <li class="on"><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+    <li><img src="mode1.png" class="img_item"/></li>
+  </ul>
+</div>
+<div class="progress_gage">
+  <div class="bar_smash">
+    <div class="target_smash"></div>
+  </div>
+  <div class="bar_gage"></div>
+</div>
+<script>
+  (function ($, ctx) {
+    var $ctx = $(ctx);
+    var $window = $(window);
+    var $ul = $ctx.find('ul');
+    var $li = $ul.children();
+    var $gageBar = $('.bar_gage');
+    var startX = 0;
+    var startY = 0;
+    var gage = 0;
+
+    $ul.on('touchstart', function (e) {
+      console.log('start');
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    });
+    $ul.on('touchmove', function (e) {
+      console.log('gaging');
+      gage += 1;
+      if(gage < 101){
+        $gageBar.css('width',gage+'%');
+      }
+      console.log(gage);
+    });
+    $ul.on('touchend', function (e) {
+      console.log('end');
+      var endX = e.changedTouches[0].clientX;
+      var endY = e.changedTouches[0].clientY;
+
+      console.log('st'+startX);
+      console.log('ed'+endX);
+
+      if(startX < endX){
+        console.log('right');
+      }else if(startX === endX){
+        console.log('attack');
+      }else if (startX >endX){
+        console.log('left');
+      }
+      gage = 0;
+      $gageBar.css('width','0');
+
+//      startX < endX ? console.log('right'):console.log('left');
+
+    });
+
+
+    $ctx.on('scroll', function () {
+//      $li.each(function (idx, elem) {
+//        var $elem = $(elem);
+//        var posY = $elem.offset().top;
+////
+////        if(posY >0 && posY <=80){
+////          elem.style.marginLeft = '80px';
+////        }
+////        if(posY >80 && posY <=160){
+////          elem.style.marginLeft = '40px';
+////        }
+//        if(posY >160 && posY <=240){
+//          $elem.addClass('on');
+//          $elem.siblings().filter('.on').removeClass('on');
+//        }
+////        if(posY >240 && posY <=320){
+////          elem.style.marginLeft = '-40px';
+////        }
+////        if(posY >320 && posY <=400){
+////          elem.style.marginLeft = '-80px';
+////        }
+//
+//      })
+    });
+
+
+
+  })(jQuery, '#wrapper')
+</script>
+</body>
+</html>

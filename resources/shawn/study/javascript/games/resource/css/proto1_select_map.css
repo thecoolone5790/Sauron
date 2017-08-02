@@ -1,0 +1,91 @@
+#page1{
+  overflow:auto;
+  width:360px;
+  height:640px;
+  background-color: #1aff9c
+}
+#page1 .list_boss{
+  width: 100%;
+  height: 505px;
+  margin-top: 10px;
+  overflow: hidden;
+  background-color: #6f6f6f;
+}
+#page1 .list_boss li{
+  border: 5px solid black;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+}
+#page1 .link_boss{
+  display: block;
+}
+#page1 .inner_frame{
+  display: block;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+#page1 .img_boss{
+  width: 100%;
+  vertical-align: top;
+  
+}
+#page1 .frame_shade{
+  position: absolute;
+  top: 0;
+  left:0;
+  width:100%;
+  height: 100%;
+  background: linear-gradient(128deg, #fff 0%, #000 68%);
+  opacity: .5;
+}
+#page1 .boss_name{
+  display: block;
+  position: absolute;
+  width: 100%;
+  bottom:3px;
+  left:1px;
+  font-size: 12px;
+  font-style: oblique;
+  text-indent: 5px;
+  color:#efefef;
+  background: linear-gradient(to left, rgba(0,255,0,0), rgb(28, 0, 0));
+}
+#page1 .mode_info{
+  position: absolute;
+  bottom: 16px;
+  right: 10px;
+  color:#efefef;
+}
+#page1 .mode_info .txt_mode{
+  display: block;
+  text-align: right;
+  font-size: 16px;
+  font-weight: bold;
+}
+#page1 .mode_info .txt_curr{
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: #efefef;
+}
+#page1 .mode_info .txt_total{
+  font-size: 10px;
+  color: #cbcbcb;
+}
+
+/*pos_type 1~5*/
+#page1 .pos_type1{
+  margin: 10px 0 10px 60px
+}
+#page1 .pos_type2{
+  margin: 0 20px 10px 40px
+}
+#page1 .pos_type3{
+  margin: 0 30px 10px
+}
+#page1 .pos_type4{
+  margin: 0 40px 10px 20px
+}
+#page1 .pos_type5{
+  margin: 0 60px 10px 0
+}

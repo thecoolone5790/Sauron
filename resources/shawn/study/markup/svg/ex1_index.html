@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #svg{width:800px;height: 600px;border: 1px solid red}
+    #pattern{width:800px;height: 600px;border: 1px solid yellow}
+  </style>
+  <script src="node_modules/snapsvg/dist/snap.svg-min.js"></script>
+</head>
+<body>
+  <svg id="svg"></svg>
+  <svg id="pattern"></svg>
+<script>
+  (function () {
+    var s = Snap('#svg');
+    var bigCircle = s.circle(150,150,100);
+    bigCircle.attr({
+      fill:'green',
+      stroke:'red',
+      strokeWidth:10
+    });
+    var smallCircle = s.circle(100,150,70);
+    var discs = s.group(smallCircle, s.circle(200,150,70));
+    discs.attr({
+      fill:'#fff'
+    });
+    bigCircle.attr({
+      mask:discs
+    });
+    smallCircle.animate({r:50},1000);
+    discs.select('circle:nth-child(2').animate({r:50},1000);
+    var p = s.path('M10-5-10,15M15,0,0,15M0-5-20,15').attr({
+      fill:'none',
+      stroke:'blue',
+      strokeWidth:3
+    });
+    p = p.pattern(0,0,10,10);
+    bigCircle.attr({
+      fill:p
+    });
+
+    discs.attr({
+      fill: Snap("#pattern")
+    });
+    discs.attr({fill: "r()#fff-#000"});
+
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+  <title>swipe</title>
+  <style>
+    *{margin:0;padding:0}
+    ul,ol{list-style:none}
+    img{display:block;vertical-align:top;width:100%;height:100%}
+    .swipe{overflow:hidden;position:relative}
+    .swipe .swipe_btn_prev{float:left;width:30%;background-color:#c2c2c2;text-align:center;color:#fff}
+    .swipe .swipe_btn_next{float:right;width:30%;background-color:#c2c2c2;text-align:center;color:#fff}
+    .swipe .swipe_pager{display:inline-block;width:40%;text-align:center}
+    .swipe .swipe_list li{
+      width:360px;
+      height: 240px;
+      text-align:center
+    }
+  </style>
+</head>
+<body>
+<div class="swipe">
+  <span class="swipe_btn_prev">[ <- ]</span>
+  <span class="swipe_pager"></span>
+  <span class="swipe_btn_next">[ -> ]</span>
+  <ul class="swipe_list"
+      style="width:0; display: flex;  transition: transform 1s cubic-bezier(0, 0, 0.25, 1); translate3d(0px, 0px, 0px);">
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+    <li><img src="https://dummyimage.com/360x240/efefef/000" class="img_item"></li>
+  </ul>
+</div>
+<script>
+  (function (exports, doc) {
+
+    exports.Slider = Slider;
+
+    function Slider(opts) {
+      if(!(this instanceof Slider)){
+        return new Slider(opts);
+      }
+      this.opts = opts;
+      this.ctx = opts.ctx;
+      this.isInfinite = opts.isInfinite || false;
+      this.itemList = doc.querySelector(this.ctx + '_list');
+      this.pager = doc.querySelector(this.ctx + '_pager');
+      this.nextBtn = doc.querySelector(this.ctx + '_btn_next');
+      this.prevBtn = doc.querySelector(this.ctx + '_btn_prev');
+      this.length = this.itemList.children.length;
+      this.maxIdx = this.length-1;
+      this.minIdx = 0;
+      this.itemWidth = 360;
+      this.currentWidth = 0;
+      this.startX = 0;
+      this.endX = 0;
+    }
+
+    Slider.prototype.getCurrentIdx = function () {
+      return this.currentWidth/this.itemWidth;
+    };
+
+    Slider.prototype.setWidth = function () {
+      this.itemList.style.width = this.length * 100 +'%';
+    };
+
+    Slider.prototype.hasNextIdx = function () {
+      return this.getCurrentIdx() < this.maxIdx;
+    };
+
+    Slider.prototype.hasPrevIdx = function () {
+      return this.getCurrentIdx() > this.minIdx;
+    };
+
+    Slider.prototype.isNext = function () {
+      return this.startX > this.endX;
+    };
+
+    Slider.prototype.isPrev = function () {
+      return this.startX < this.endX;
+    };
+
+    Slider.prototype.moveTo = function (idx) {
+      if(this.isInfinite){
+        this.currentWidth = this.itemWidth * idx;
+        this.itemList.style.transform = 'translate3d(-' + this.currentWidth + 'px,0px,0px)';
+        this.setPager();
+      }
+    };
+
+    Slider.prototype.toNext = function () {
+      this.currentWidth += this.itemWidth;
+      this.itemList.style.transform = 'translate3d(-' + this.currentWidth + 'px,0px,0px)';
+    };
+
+    Slider.prototype.toPrev = function () {
+      this.currentWidth -= this.itemWidth;
+      this.itemList.style.transform = 'translate3d(-' + this.currentWidth + 'px,0px,0px)';
+    };
+
+    Slider.prototype.setPager = function () {
+      var currentPage = this.getCurrentIdx() + 1;
+      this.pager.innerText = currentPage + ' / ' + this.length;
+    };
+
+    Slider.prototype.bindEvents = function () {
+      var self = this;
+      this.itemList.addEventListener('touchstart', function (e) {
+        self.startX = e.touches[0].clientX;
+      });
+      this.itemList.addEventListener('touchend', function (e) {
+        self.endX = e.changedTouches[0].clientX;
+        if (self.isNext() && self.hasNextIdx()) {
+          self.toNext();
+        }else if(self.isNext()){
+          self.moveTo(self.minIdx);
+        }
+        if (self.isPrev() && self.hasPrevIdx()) {
+          self.toPrev();
+        }else if(self.isPrev()){
+          self.moveTo(self.maxIdx);
+        }
+        self.setPager();
+      });
+      this.nextBtn.addEventListener('click', function () {
+        if (self.hasNextIdx()) {
+          self.toNext();
+          self.setPager();
+        }else{
+          self.moveTo(self.minIdx);
+        }
+      });
+      this.prevBtn.addEventListener('click', function () {
+        if (self.hasPrevIdx()) {
+          self.toPrev();
+          self.setPager();
+        }else{
+          self.moveTo(self.maxIdx);
+        }
+      });
+    };
+
+    Slider.prototype.init = function () {
+      this.setWidth();
+      this.setPager();
+      this.bindEvents();
+    }
+
+  })(window, document);
+
+  var opts = {
+    ctx:'.swipe',
+    isInfinite:true
+  };
+
+  var s = Slider(opts);
+
+  s.init();
+
+</script>
+</body>
+</html>
